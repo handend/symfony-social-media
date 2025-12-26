@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }} - Detay{% endblock %}
+
+{% block bread %}
+    → Post
+{% endblock %}
+
+{% block body %}
+    <div class="max-w-3xl mx-auto mt-8 px-4">
+
+        {# --- 1. ÜST KISIM (BAŞLIK VE TARİH) --- #}
+        <div class="mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">
+                {{ post.title }}
+            </h1>
+
+            <div class="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+                <span>Yayınlanma: </span>
+                <span class="ml-1 font-medium">
+                    {% if date(post.created) < date('-1 year') %}
+                        1 yıldan eski ({{ post.created|date('d/m/Y') }})
+                    {% else %}
+                        {{ post.created|date('d/m/Y') }}
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+        {# --- 2. İÇERİK KISMI --- #}
+        <div class="prose dark:prose-invert max-w-none text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
+            {{ post.text }}
+        </div>
+
+        {# --- 3. AKSİYON BUTONLARI --- #}
+        <div class="flex items-center space-x-4 mb-10">
+            {# Geri Dön #}
+            <a href="{{ path('app_micro_post') }}" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg transition">
+                ← Back to list
+            </a>
+
+            {# Yorum Yap Butonu #}
+            <a href="{{ path('app_micro_post_comment', {post: post.id}) }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition shadow-md">
+                💬 Add Comment
+            </a>
+        </div>
+
+        {# --- 4. YORUMLAR LİSTESİ --- #}
+        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-b pb-2">
+                Comments ({{ post.comments|length }})
+            </h3>
+
+            {# TEK BİR DÖNGÜ İLE BİRLEŞTİRİLDİ #}
+            {% for comment in post.comments %}
+                <div class="mb-6">
+                    {# Üst Kısım: Avatar ve İsim #}
+                    <div class="flex items-center mb-2">
+                        <div class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full text-3xl w-8 h-8 ring-2 ring-white dark:ring-gray-600 mr-3"></div>
+                        <div>
+                            <div class="font-medium text-gray-800 dark:text-gray-300 text-sm">Author</div>
+                            <div class="font-light text-gray-500 dark:text-gray-500 text-xs">When</div>
+                        </div>
+                    </div>
+
+                    {# Alt Kısım: Çizgi ve Yorum Metni #}
+                    <div class="flex">
+                        {# Sol taraftaki dikey çizgi #}
+                        <div class="border-l-2 border-gray-300 dark:border-gray-600 ml-4 mr-6"></div>
+
+                        {# Yorumun kendisi #}
+                        <div class="text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 p-3 rounded-lg shadow-sm w-full">
+                            {{ comment.text }}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="text-center py-8 text-gray-500 italic">
+                    No comments yet. Be the first to comment!
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
