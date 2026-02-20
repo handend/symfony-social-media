@@ -30,11 +30,24 @@
 
             <div class="text-right">
                 <div class="text-sm text-gray-400 dark:text-gray-500">
-                    <a href="{{ path('app_login') }}">Login</a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div>
+                        <a href="{{ path('app_micro_post_add') }}">Add New Post</a>
+                    </div>
+                        <div>
+                            <a href="{{ path('app_logout') }}">Log Out</a>
+                        </div>
+                    {% else %}
+                    <div>
+                        <a href="{{ path('app_login') }}">Log In</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_register') }}">Sign Up</a>
+                    </div>
+                    {% endif %}
+
                 </div>
-                <div>
-                    <a href="{{ path('app_micro_post_add') }}">Add new post</a>
-                </div>
+
             </div>
         </div>
 

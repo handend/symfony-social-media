@@ -18,7 +18,7 @@
         {# Date and User Info #}
         <div class="flex flex-col text-gray-500 dark:text-gray-400">
             <span class="mb-1">Published: {{ post.created | date("M j, Y") }}</span>
-            <a href="#" class="text-xs hover:text-indigo-600 dark:hover:text-indigo-400">user@email.com</a>
+            <a href="#" class="text-xs hover:text-indigo-600 dark:hover:text-indigo-400">{{ post.author.email }}</a>
 
         </div>
 

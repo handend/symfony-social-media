@@ -36,5 +36,5 @@ services:
   mailer:
     image: schickling/mailcatcher
     ports:
-      - 1033:1080  # dışarıya açılan port
+      - 1033:8025  # dışarıya açılan port
       - 1038:1025  # dışarıya açılan port
