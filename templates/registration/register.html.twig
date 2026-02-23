@@ -49,10 +49,18 @@
         </div>
 
         <div>
-            {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
-            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2.5 border transition duration-150'}}) }}
+            {{ form_label(registrationForm.plainPassword.first, 'Password', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+            {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2.5 border transition duration-150'}}) }}
             <div class="text-red-500 text-sm mt-1 font-medium">
-                {{ form_errors(registrationForm.plainPassword) }}
+                {{ form_errors(registrationForm.plainPassword.first) }}
+            </div>
+        </div>
+
+        <div>
+            {{ form_label(registrationForm.plainPassword.second, 'Repeat Password', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+            {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2.5 border transition duration-150'}}) }}
+            <div class="text-red-500 text-sm mt-1 font-medium">
+                {{ form_errors(registrationForm.plainPassword.second) }}
             </div>
         </div>
 
