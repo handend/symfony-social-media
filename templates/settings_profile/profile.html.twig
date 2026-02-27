@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block body %}
+    {{ form_start(form) }}
+
     {{ include ('settings_profile/_profile_form.html.twig') }}
     <div>
         <button type="submit"
